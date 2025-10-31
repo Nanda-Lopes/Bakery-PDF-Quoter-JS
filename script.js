@@ -124,7 +124,14 @@ document.getElementById('orcamento-form').addEventListener('submit', function(ev
     // --- GERAÇÃO USANDO HTML2CANVAS + JSDPF ---
     const element = document.getElementById('orcamento-final');
 
-    html2canvas(element, { scale: 2 }).then(canvas => {
+    // Linha 127
+    html2canvas(element, { 
+        scale: 2, 
+        logging: false, 
+        useCORS: true,
+        backgroundColor: '#ffffffd1', // CRUCIAL: Força o fundo cinza Dolce
+        allowTaint: true 
+    }).then(canvas => {
         const { jsPDF } = window.jspdf;
         const imgData = canvas.toDataURL('image/png');
         const pdf = new jsPDF('p', 'mm', 'a4');
@@ -132,16 +139,16 @@ document.getElementById('orcamento-form').addEventListener('submit', function(ev
         const pdfHeight = pdf.internal.pageSize.getHeight();
         const imgHeight = (canvas.height * pdfWidth) / canvas.width;
 
-        // Se a altura for muito grande, tenta fitar em mais páginas
+        // Verifica se o conteúdo é maior que uma página A4
         if (imgHeight > pdfHeight) {
-            // Lógica para múltiplas páginas (muito complexa para este caso)
-            // Por simplicidade, vamos apenas garantir que caiba na primeira página
+            // Lógica para que o conteúdo caiba na primeira página (mantida por simplicidade)
             const imgWidth = pdfWidth;
             const imgHeightCalculated = (canvas.height * imgWidth) / canvas.width;
             
             pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeightCalculated);
             
         } else {
+            // Se couber na página
             pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, imgHeight);
         }
 
@@ -151,4 +158,4 @@ document.getElementById('orcamento-form').addEventListener('submit', function(ev
         // Limpa o template após a geração
         pdfTemplate.innerHTML = '';
     });
-});
+}); // Linha 154
