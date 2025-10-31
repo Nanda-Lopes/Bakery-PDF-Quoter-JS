@@ -239,3 +239,42 @@ hr {
     font-size: 8pt;
     margin: 3px 0;
 }
+
+/* style.css (ADICIONAR NO FINAL) */
+
+.logo-orcamento {
+    width: 150px; /* Ajuste o tamanho da logo */
+    height: auto;
+    display: block;
+    margin: 0 auto 10px auto; /* Centraliza */
+}
+
+.footer-pagamento {
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px dashed #ccc;
+    font-size: 9pt;
+}
+
+.footer-pagamento h3 {
+    color: #6a1b9a;
+    font-size: 11pt;
+    margin-bottom: 5px;
+}
+
+.pagamento-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14pt;
+    font-weight: bold;
+    color: #9c27b0;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 5px;
+}
+
+/* Garante que o total da tabela fique alinhado à direita */
+.orcamento-tabela th:nth-child(3), 
+.orcamento-tabela td.valor-celula {
+    text-align: right;
+}

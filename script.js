@@ -81,15 +81,16 @@ document.getElementById('orcamento-form').addEventListener('submit', function(ev
     const templateHTML = `
         <div id="orcamento-final">
             <div class="header-pdf">
-                <h1>ORÇAMENTO OFICIAL</h1>
-                <p>Doceria Doce Sabor 🎂</p>
-                <p>CNPJ: XX.XXX.XXX/0001-XX | Telefone: (XX) XXXX-XXXX</p>
+                <h1style="color:#6a1b9a; margin-top: 10px;">ORÇAMENTO OFICIAL</h1>
+                <img src="./images/logo.png" alt="Logo Dolce Con Fiore" class="logo-orcamento">
+                <p>Doceria Dolce con Fiore 🌷</p>
+                <p>Telefone: (71) 98253-4500</p>
             </div>
             
             <div class="info-cliente">
                 <p><strong>Cliente:</strong> ${nomeCliente}</p>
                 <p><strong>Data do Orçamento:</strong> ${dataOrcamento}</p>
-                <p><strong>Validade:</strong> 7 dias</p>
+                <p><strong>Validade:</strong> 15 dias</p>
             </div>
             
             <table class="orcamento-tabela">
@@ -111,9 +112,21 @@ document.getElementById('orcamento-form').addEventListener('submit', function(ev
                 <p class="valor-total">R$ ${totalGeral.toFixed(2).replace('.', ',')}</p>
             </div>
             
+            <div class="footer-pagamento">
+                <div class="pagamento-total">
+                    <strong>TOTAL GERAL:</strong>
+                    <span class="valor-total">R$ ${totalGeral.toFixed(2).replace('.', ',')}</span>
+                </div>
+                
+                <h3>Pagamento:</h3>
+                <p>Pagamento em espécie ou Transferência bancária:</p>
+                <p>Banco Bradesco | Agência: XXX | Conta: YYY</p>
+                <p>PIX: [Chave PIX da Doceria]</p>
+            </div>
+
             <div class="observacao-rodape">
-                <p>* Valores sujeitos a alteração após 7 dias.</p>
-                <p>Agradecemos a preferência!</p>
+                <p>Sua encomenda será confirmada após o pagamento de 50% do valor total do pedido.</p>
+                <p>O restante do valor deve ser pago até a data do pedido, antes da entrega.</p>
             </div>
         </div>
     `;
