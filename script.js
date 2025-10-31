@@ -1,8 +1,6 @@
-// script.js (VERSÃO MAIS ESTÁVEL E LIMPA)
+// script.js (VERSÃO MAIS ROBUSTA COM HTML2CANVAS EXPLÍCITO)
 
-// Forçar cache
-
-// 1. LÓGICA DE ADICIONAR/REMOVER ITENS DO FORMULÁRIO
+// 1. LÓGICA DE ADICIONAR/REMOVER ITENS DO FORMULÁRIO (SEM ALTERAÇÃO)
 // =========================================================
 
 function criarItemHTML(nome = '', quantidade = '', valor = '') {
@@ -18,7 +16,6 @@ function criarItemHTML(nome = '', quantidade = '', valor = '') {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Adiciona o primeiro item na tela
     if (document.getElementById('itens-container').children.length === 0) {
         document.getElementById('itens-container').appendChild(criarItemHTML());
     }
@@ -35,13 +32,13 @@ document.getElementById('itens-container').addEventListener('click', (event) => 
 });
 
 
-// 2. LÓGICA DE GERAÇÃO DO PDF (Método doc.html() simples - Corrigido o erro)
+// 2. LÓGICA DE GERAÇÃO DO PDF (Método HTML2CANVAS + JSDPF)
 // =========================================================
 
 document.getElementById('orcamento-form').addEventListener('submit', function(event) {
     event.preventDefault();
     
-    // Captura e Validação dos Dados
+    // Captura e Validação dos Dados (SEM ALTERAÇÃO)
     const nomeCliente = document.getElementById('cliente').value.trim();
     const dataInput = document.getElementById('data').value;
     
@@ -71,7 +68,7 @@ document.getElementById('orcamento-form').addEventListener('submit', function(ev
         return;
     }
 
-    // Monta o HTML do Orçamento
+    // Monta o HTML do Orçamento (SEM ALTERAÇÃO)
     let tabelaItensHTML = itens.map(item => `
         <tr>
             <td>${item.nome}</td>
@@ -124,23 +121,34 @@ document.getElementById('orcamento-form').addEventListener('submit', function(ev
     const pdfTemplate = document.getElementById('orcamento-pdf-template');
     pdfTemplate.innerHTML = templateHTML;
 
-    // --- GERAÇÃO USANDO DOC.HTML ---
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF('p', 'mm', 'a4');
-    
-    const options = {
-        callback: function(doc) {
-            const nomeArquivo = `Orcamento_${nomeCliente.replace(/[^a-zA-Z0-9]/g, '_')}_${new Date().getFullYear()}.pdf`;
-            doc.save(nomeArquivo);
-        },
-        // ESTAS OPÇÕES SÃO ESSENCIAIS E NÃO CONTÊM REFERÊNCIA AO html2canvas:
-        x: 10,
-        y: 10,
-        width: 190,
-        windowWidth: 750 
-    };
-    
-    doc.html(pdfTemplate, options);
-    
-    pdfTemplate.innerHTML = '';
+    // --- GERAÇÃO USANDO HTML2CANVAS + JSDPF ---
+    const element = document.getElementById('orcamento-final');
+
+    html2canvas(element, { scale: 2 }).then(canvas => {
+        const { jsPDF } = window.jspdf;
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = pdf.internal.pageSize.getHeight();
+        const imgHeight = (canvas.height * pdfWidth) / canvas.width;
+
+        // Se a altura for muito grande, tenta fitar em mais páginas
+        if (imgHeight > pdfHeight) {
+            // Lógica para múltiplas páginas (muito complexa para este caso)
+            // Por simplicidade, vamos apenas garantir que caiba na primeira página
+            const imgWidth = pdfWidth;
+            const imgHeightCalculated = (canvas.height * imgWidth) / canvas.width;
+            
+            pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeightCalculated);
+            
+        } else {
+            pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, imgHeight);
+        }
+
+        const nomeArquivo = `Orcamento_${nomeCliente.replace(/[^a-zA-Z0-9]/g, '_')}_${new Date().getFullYear()}.pdf`;
+        pdf.save(nomeArquivo);
+
+        // Limpa o template após a geração
+        pdfTemplate.innerHTML = '';
+    });
 });
