@@ -1,5 +1,7 @@
 // script.js (VERSÃO MAIS ESTÁVEL E LIMPA)
 
+// Forçar cache
+
 // 1. LÓGICA DE ADICIONAR/REMOVER ITENS DO FORMULÁRIO
 // =========================================================
 
