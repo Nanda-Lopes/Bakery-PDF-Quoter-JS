@@ -1,0 +1,241 @@
+/* ========================================================= */
+/* 1. ESTILO GERAL E DO FORMULÁRIO DE ENTRADA DE DADOS */
+/* ========================================================= */
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #9c27b0; /* Cor da doceria */
+}
+
+h1 {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+#orcamento-form {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #6a1b9a;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 5px;
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* Estilo dos Inputs */
+input[type="text"], input[type="number"], input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Linha de Itens */
+#itens-container {
+    margin-bottom: 20px;
+}
+
+.item-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 8px;
+    align-items: center;
+}
+
+.item-row input.nome-item {
+    flex-grow: 3;
+}
+
+.item-row input.quantidade {
+    flex-grow: 1;
+    max-width: 80px;
+    text-align: center;
+}
+
+.item-row input.valor-unitario {
+    flex-grow: 2;
+}
+
+/* Estilo dos Botões */
+.btn-primary, .btn-secondary, .remover-item {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-weight: bold;
+}
+
+.btn-primary {
+    background-color: #9c27b0;
+    color: white;
+    width: 100%;
+    font-size: 1.1em;
+    margin-top: 20px;
+}
+
+.btn-primary:hover {
+    background-color: #7b1fa2;
+}
+
+.btn-secondary {
+    background-color: #e0e0e0;
+    color: #333;
+    display: inline-block;
+    margin-top: 15px;
+    padding: 8px 12px;
+}
+
+.btn-secondary:hover {
+    background-color: #bdbdbd;
+}
+
+.remover-item {
+    background-color: #f44336;
+    color: white;
+    padding: 10px;
+    flex-grow: 0;
+    white-space: nowrap;
+}
+
+.remover-item:hover {
+    background-color: #d32f2f;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background-color: #ccc;
+    margin: 20px 0;
+}
+
+
+/* ========================================================= */
+/* 2. ESTILO DA ESTRUTURA PARA O PDF (DIV #orcamento-pdf-template) */
+/* ========================================================= */
+
+#orcamento-pdf-template {
+    width: 750px; 
+    font-family: 'Times New Roman', serif; 
+    padding: 30px; 
+    box-sizing: border-box;
+    font-size: 10pt;
+    background-color: white; 
+}
+
+#orcamento-final {
+    background-color: white;
+    padding: 20px;
+}
+
+.header-pdf {
+    text-align: center;
+    border-bottom: 3px solid #6a1b9a;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.header-pdf h1 {
+    color: #6a1b9a;
+    font-size: 16pt;
+    margin: 0;
+}
+
+.header-pdf p {
+    margin: 2px 0;
+    font-size: 8pt;
+}
+
+.info-cliente {
+    margin-bottom: 20px;
+    border-left: 5px solid #9c27b0;
+    padding-left: 10px;
+}
+
+.info-cliente p {
+    margin: 5px 0;
+    font-size: 10pt;
+}
+
+/* Tabela do Orçamento */
+.orcamento-tabela {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.orcamento-tabela th, .orcamento-tabela td {
+    border: 1px solid #aaa;
+    padding: 8px;
+    text-align: left;
+    font-size: 9pt;
+}
+
+.orcamento-tabela th {
+    background-color: #f0e6f2;
+    color: #333;
+    font-weight: bold;
+}
+
+.orcamento-tabela td.valor-celula {
+    text-align: right;
+    font-family: monospace;
+}
+
+/* Área do Total Geral */
+.total-area {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+    border-top: 3px solid #6a1b9a;
+    padding-top: 10px;
+}
+
+.total-area p {
+    margin: 0;
+    font-size: 12pt;
+    font-weight: bold;
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.valor-total {
+    color: #9c27b0;
+}
+
+/* Observações no Rodapé */
+.observacao-rodape {
+    margin-top: 30px;
+    font-style: italic;
+    text-align: center;
+    border-top: 1px dashed #ccc;
+    padding-top: 10px;
+}
+
+.observacao-rodape p {
+    font-size: 8pt;
+    margin: 3px 0;
+}

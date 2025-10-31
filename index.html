@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Orçamento - Doceria Bakery</title>
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+
+    <header>
+        <h1>🧁 Bakery PDF Quoter - Gerador de Orçamento</h1>
+    </header>
+
+    <form id="orcamento-form">
+        
+        <h2>Dados do Cliente</h2>
+        <div class="form-group">
+            <label for="cliente">Nome do Cliente:</label>
+            <input type="text" id="cliente" required placeholder="Ex: Maria da Silva">
+        </div>
+        
+        <div class="form-group">
+            <label for="data">Data do Evento/Orçamento:</label>
+            <input type="date" id="data" required>
+        </div>
+
+        <hr>
+
+        <h2>Itens do Pedido</h2>
+        <div id="itens-container">
+            </div>
+
+        <button type="button" id="adicionar-item" class="btn-secondary">Adicionar Item</button>
+
+        <hr>
+
+        <button type="submit" class="btn-primary">
+            Gerar Orçamento Oficial em PDF
+        </button>
+    </form>
+
+    <div id="orcamento-pdf-template" class="orcamento-template" style="display: none;">
+        </div>
+
+    <script src="script.js" defer></script>
+</body>
+</html>
