@@ -82,7 +82,7 @@ document.getElementById('orcamento-form').addEventListener('submit', function(ev
         <div id="orcamento-final">
             <div class="header-pdf">
                 <h1style="color:#6a1b9a; margin-top: 10px;">ORÇAMENTO OFICIAL</h1>
-                <img src="./images/logo.png" alt="Logo Dolce Con Fiore" class="logo-orcamento">
+                <img src="/images/logo.png" alt="Logo Dolce Con Fiore" class="logo-orcamento">
                 <p>Doceria Dolce con Fiore 🌷</p>
                 <p>Telefone: (71) 98253-4500</p>
             </div>
